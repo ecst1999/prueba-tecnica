@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "8e3c15f9-2b02-4f36-931c-7f5518b6e68f",
+		"name": "Prueba Técnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_collection_id": "8e3c15f9-2b02-4f36-931c-7f5518b6e68f"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Guardar Cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"persona\": {\n    \"nombre\": \"Juan Osorio\",\n    \"genero\": \"MASCULINO\",\n    \"edad\": 19,\n    \"identificacion\": \"33112333123\",\n    \"direccion\": \"13 junio y Equinoccial\",\n    \"telefono\": \"098874587\"\n  },\n  \"contrasena\": \"1245\",\n  \"estado\": true\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/clientes/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"guardar"
+							]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"persona\": {\n    \"nombre\": \"Juan Pérez\",\n    \"genero\": \"MASCULINO\",\n    \"edad\": 35,\n    \"identificacion\": \"0987654312\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"telefono\": \"0987654321\",\n    \"personaId\": 3\n  },\n  \"contrasena\": \"919123laclavees\",\n  \"estado\": \"ACTIVO\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/clientes/actualizar/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"actualizar",
+								"8"
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener Cliente por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								""
+							]
+						}
+					}
+				},
+				{
+					"name": "Eliminar cliente por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientes/eliminar/13",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"eliminar",
+								"13"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Cuenta",
+			"item": [
+				{
+					"name": "Guardar cuenta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroCuenta\": \"478758\",\n    \"tipoCuenta\": \"AHORROS\",\n    \"saldoInicial\": 2000.0,\n    \"estado\": true,\n    \"cliente\": {\n        \"clienteId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/cuentas/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cuentas",
+								"guardar"
+							]
+						}
+					}
+				},
+				{
+					"name": "Actualizar cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroCuenta\": \"225487\",\n    \"tipoCuenta\": \"CORRIENTE\",\n    \"saldoInicial\": 0.0,\n    \"estado\": true,\n    \"cliente\": {\n        \"clienteId\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/cuentas/actualizar/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cuentas",
+								"actualizar",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener cuenta por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cuentas/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cuentas",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener cuentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cuentas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cuentas",
+								""
+							]
+						}
+					}
+				},
+				{
+					"name": "Eliminar cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cuentas/eliminar/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cuentas",
+								"eliminar",
+								"1"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Movimiento",
+			"item": [
+				{
+					"name": "Guardar movimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoMovimiento\": \"Retiro de 540\",\n    \"valor\": -540,\n    \"saldo\": 540,\n    \"cuenta\": {\n        \"cuentaId\": 4\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/movimientos/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								"guardar"
+							]
+						}
+					}
+				},
+				{
+					"name": "Actualizar movimiento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha\": \"2025-08-01\",\n    \"tipoMovimiento\": \"Deposito de 575\",\n    \"valor\": 575,\n    \"saldo\": 825,\n    \"cuenta\": {\n        \"cuentaId\": 2\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/movimientos/actualizar/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								"actualizar",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener movimientos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movimientos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								""
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener movimiento por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movimientos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Eliminar movimiento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/movimientos/eliminar/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movimientos",
+								"eliminar",
+								"2"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
