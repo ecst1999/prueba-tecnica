@@ -1,19 +1,16 @@
 package com.ecst.microservicio.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "clientes")
-public class Cliente {
+public class Cliente extends Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +21,8 @@ public class Cliente {
     private String contrasena;
     
     @Column(name = "estado")
-    private Boolean estado;
+    private Boolean estado = true;    
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = {"persona", "hibernateLazyInitializer", "handler"})    
-    private Persona persona;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-    @JsonIgnoreProperties(value = {"listaCuentas", "hibernateLazyInitializer", "handler"})
-    private List<Cuenta> listaCuentas = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)    
+    private List<Cuenta> listaCuentas;
 }

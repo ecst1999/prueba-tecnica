@@ -1,7 +1,6 @@
 package com.ecst.microservicio.model;
 
 import com.ecst.microservicio.enumeration.TipoCuenta;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,10 +18,6 @@ import java.util.List;
 public class Cuenta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cuenta_id")
-    private Long cuentaId;
-
     @Column(name = "numero_cuenta", nullable = false, unique = true, length = 30)
     private String numeroCuenta;
 
@@ -35,13 +29,12 @@ public class Cuenta {
     private BigDecimal saldoInicial;
     
     @Column(name = "estado")
-    private Boolean estado;
+    private Boolean estado = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clienteId", nullable = false)
-    @JsonIgnoreProperties(value = {"clientes", "hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "clienteId", nullable = false)    
     private Cliente cliente;
 
     @OneToMany(mappedBy = "cuenta", fetch = FetchType.LAZY)
-    private List<Movimiento> listaMovimientos = new ArrayList<>();
+    private List<Movimiento> listaMovimientos;
 }

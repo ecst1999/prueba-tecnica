@@ -24,12 +24,16 @@ DROP TABLE IF EXISTS `clientes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
   `cliente_id` bigint NOT NULL AUTO_INCREMENT,
+  `direccion` varchar(255) DEFAULT NULL,
+  `edad` int DEFAULT NULL,
+  `genero` enum('FEMENINO','MASCULINO') NOT NULL,
+  `identificacion` varchar(25) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `telefono` varchar(25) DEFAULT NULL,
   `contrasena` varchar(35) NOT NULL,
   `estado` bit(1) DEFAULT NULL,
-  `persona_persona_id` bigint DEFAULT NULL,
   PRIMARY KEY (`cliente_id`),
-  UNIQUE KEY `UKki7gl6vvhtv67rjvl8bir2olk` (`persona_persona_id`),
-  CONSTRAINT `FK3esf59jce7iphpi2oy5lat3j1` FOREIGN KEY (`persona_persona_id`) REFERENCES `personas` (`persona_id`)
+  UNIQUE KEY `UKmvqpaay4xno9pnlalro0awadi` (`identificacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +43,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'1234',_binary '',1),(2,'5678',_binary '',2),(3,'1245',_binary '',5);
+INSERT INTO `clientes` VALUES (1,'Otavalo sn y principal',30,'MASCULINO','1234567893','Jose Lema','098254785','1234',_binary ''),(2,'Amazonas y NNUU',38,'FEMENINO','0987665421','Marianela Montalvo','097548965','5678',_binary ''),(3,'13 junio y Equinoccial',22,'MASCULINO','0977642212','Juan Osorio','097548965','1245',_binary '');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,17 +55,15 @@ DROP TABLE IF EXISTS `cuentas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cuentas` (
-  `cuenta_id` bigint NOT NULL AUTO_INCREMENT,
-  `estado` bit(1) DEFAULT NULL,
   `numero_cuenta` varchar(30) NOT NULL,
+  `estado` bit(1) DEFAULT NULL,
   `saldo_inicial` decimal(38,2) NOT NULL,
   `tipo_cuenta` enum('AHORROS','CORRIENTE') NOT NULL,
   `cliente_id` bigint NOT NULL,
-  PRIMARY KEY (`cuenta_id`),
-  UNIQUE KEY `UK7h7mqvcau3mcl0mbrkdrt7fnh` (`numero_cuenta`),
+  PRIMARY KEY (`numero_cuenta`),
   KEY `FK65yk2321jpusl3fk96lqehrli` (`cliente_id`),
   CONSTRAINT `FK65yk2321jpusl3fk96lqehrli` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +72,7 @@ CREATE TABLE `cuentas` (
 
 LOCK TABLES `cuentas` WRITE;
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
-INSERT INTO `cuentas` VALUES (1,_binary '','478758',1425.00,'AHORROS',1),(2,_binary '','225487',200.00,'CORRIENTE',2),(3,_binary '','495878',150.00,'AHORROS',3),(4,_binary '','496825',0.00,'AHORROS',2),(5,_binary '','585545',1000.00,'CORRIENTE',1);
+INSERT INTO `cuentas` VALUES ('225487',_binary '',1300.00,'CORRIENTE',2),('478758',_binary '',1425.00,'AHORROS',1),('495878',_binary '',150.00,'AHORROS',3),('496825',_binary '',0.00,'AHORROS',2),('585545',_binary '',1000.00,'CORRIENTE',1);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,11 +89,11 @@ CREATE TABLE `movimientos` (
   `saldo` decimal(38,2) NOT NULL,
   `tipo_movimiento` varchar(255) NOT NULL,
   `valor` decimal(38,2) NOT NULL,
-  `cuenta_id` bigint DEFAULT NULL,
+  `numero_cuenta` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`movimiento_id`),
-  KEY `FK4moe88hxuohcysas5h70mdc09` (`cuenta_id`),
-  CONSTRAINT `FK4moe88hxuohcysas5h70mdc09` FOREIGN KEY (`cuenta_id`) REFERENCES `cuentas` (`cuenta_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKo5koqjuegcyto02t8ytlf3y80` (`numero_cuenta`),
+  CONSTRAINT `FKo5koqjuegcyto02t8ytlf3y80` FOREIGN KEY (`numero_cuenta`) REFERENCES `cuentas` (`numero_cuenta`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,38 +102,8 @@ CREATE TABLE `movimientos` (
 
 LOCK TABLES `movimientos` WRITE;
 /*!40000 ALTER TABLE `movimientos` DISABLE KEYS */;
-INSERT INTO `movimientos` VALUES (1,'2025-08-03',2000.00,'Retiro de 575',-575.00,1),(2,'2025-08-03',100.00,'Deposito de 600',100.00,2),(3,'2025-08-03',0.00,'Deposito de 150',150.00,3),(4,'2025-08-03',540.00,'Retiro de 540',-540.00,4);
+INSERT INTO `movimientos` VALUES (1,'2025-11-22',1425.00,'Retiro',-575.00,'478758'),(2,'2025-11-22',700.00,'Deposito',600.00,'225487'),(3,'2025-11-22',150.00,'Deposito',150.00,'495878'),(4,'2025-11-22',0.00,'Retiro',-540.00,'496825'),(5,'2025-11-22',1300.00,'Deposito',600.00,'225487');
 /*!40000 ALTER TABLE `movimientos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `personas`
---
-
-DROP TABLE IF EXISTS `personas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `personas` (
-  `persona_id` bigint NOT NULL AUTO_INCREMENT,
-  `direccion` varchar(255) DEFAULT NULL,
-  `edad` int DEFAULT NULL,
-  `genero` enum('FEMENINO','MASCULINO') NOT NULL,
-  `identificacion` varchar(25) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `telefono` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`persona_id`),
-  UNIQUE KEY `UKdpxdn543sbyt8xkvsqha0l1li` (`identificacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `personas`
---
-
-LOCK TABLES `personas` WRITE;
-/*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES (1,'Otavalo sn y principal',35,'MASCULINO','1234567890','Jose Lema','098254785'),(2,'Amazonas y NNUU',33,'FEMENINO','0987654321','Marianela Montalvo','097548965'),(5,'13 junio y Equinoccial',19,'MASCULINO','33112333123','Juan Osorio','098874587');
-/*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -143,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-03 23:24:57
+-- Dump completed on 2025-11-22 21:56:03

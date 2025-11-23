@@ -1,19 +1,23 @@
 package com.ecst.microservicio.services;
 
+import java.time.LocalDate;
+
+import com.ecst.microservicio.dtos.Response;
 import com.ecst.microservicio.model.Movimiento;
 
-import java.util.List;
 
 public interface MovimientoService {
 
-    Movimiento guardarMovimiento(Movimiento movimiento);
+    Response guardarMovimiento(Movimiento movimiento);
 
-    Movimiento actualizarMovimiento(Movimiento movimiento);
+    Response actualizarMovimiento(Movimiento movimiento);
 
-    List<Movimiento> obtenerMovimientos();
+    Response obtenerMovimientos();
 
-    Movimiento obtenerMovimientoId(Long movimientoId);
+    Response obtenerMovimientoId(Long movimientoId);
 
-    void eliminarMovimiento(Long movimientoId);
+    Response eliminarMovimiento(Long movimientoId);
+
+    Response generarReporte(LocalDate fechaInicio, LocalDate fechaFin, Long clienteId);
 
 }

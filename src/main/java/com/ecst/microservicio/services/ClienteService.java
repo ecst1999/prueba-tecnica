@@ -1,19 +1,18 @@
 package com.ecst.microservicio.services;
 
+import com.ecst.microservicio.dtos.Response;
 import com.ecst.microservicio.model.Cliente;
-
-import java.util.List;
 
 public interface ClienteService {
 
-    Cliente guardarCliente(Cliente cliente);
+    Response guardarCliente(Cliente cliente);
 
-    Cliente actualizarCliente(Cliente cliente);
+    Response actualizarCliente(Cliente cliente);
 
-    List<Cliente> obtenerClientes();
+    Response obtenerClientes();
 
-    Cliente obtenerClienteId(Long clienteId);
+    Response obtenerClienteId(Long clienteId);
 
-    void eliminarCliente(Long clienteId);
+    Response eliminarCliente(Long clienteId);
 
 }

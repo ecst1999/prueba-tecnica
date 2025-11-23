@@ -1,20 +1,19 @@
 package com.ecst.microservicio.services;
 
+import com.ecst.microservicio.dtos.Response;
 import com.ecst.microservicio.model.Cuenta;
-
-import java.util.List;
 
 public interface CuentaService {
 
-    Cuenta guardarCuenta(Cuenta cuenta);
+    Response guardarCuenta(Cuenta cuenta);
 
-    Cuenta actualizarCuenta(Cuenta cuenta);
+    Response actualizarCuenta(Cuenta cuenta);
 
-    List<Cuenta> obtenerCuentas();
+    Response obtenerCuentas();
 
-    Cuenta obtenerCuentaId(Long cuentaId);
+    Response obtenerCuentaNumero(String numeroCuenta);
 
-    void eliminarCuenta(Long cuentaId);
+    Response eliminarCuenta(String numeroCuenta);
 
 
 }

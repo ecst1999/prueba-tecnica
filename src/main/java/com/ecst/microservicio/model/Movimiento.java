@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +22,7 @@ public class Movimiento {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = true)
-    private Date fecha;
+    private LocalDate fecha;
     
     @Column(name = "tipo_movimiento", nullable = false)
     private String tipoMovimiento;
@@ -33,7 +33,7 @@ public class Movimiento {
     @Column(name = "saldo", nullable = false)
     private BigDecimal saldo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cuenta_id", nullable = true)
+    @ManyToOne()
+    @JoinColumn(name = "numero_cuenta", nullable = true)
     private Cuenta cuenta;
 }
